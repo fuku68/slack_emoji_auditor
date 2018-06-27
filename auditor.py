@@ -1,3 +1,4 @@
+# coding:utf-8
 import os
 import argparse
 import requests
@@ -56,14 +57,18 @@ def result_print(result):
   print('----------- result ---------------')
   for type in RESPONSE_TYPE:
     print(type + ':')
-    print('  VERY_LIKELY: ' + str(result[type]['VERY_LIKELY']))
-    print('       LIKELY: ' + str(result[type]['LIKELY']))
-    print('     POSSIBLE: ' + str(result[type]['POSSIBLE']))
+    print('  VERY_LIKELY: ' + unicode_array_to_str(result[type]['VERY_LIKELY']))
+    print('       LIKELY: ' + unicode_array_to_str(result[type]['LIKELY']))
+    print('     POSSIBLE: ' + unicode_array_to_str(result[type]['POSSIBLE']))
     print('')
     print('  statistics:')
     for name in LIKEHOOD_NAME: 
       print('    ' + '{0:>13}'.format(name) + ': ' + str( result[type][name + '_COUNT']))
     print('')
+
+def unicode_array_to_str(array):
+  str = ', '.join(array)
+  return '[' + str + ']'
 
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
